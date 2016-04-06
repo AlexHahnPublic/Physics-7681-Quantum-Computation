@@ -1,0 +1,304 @@
+\input{/Users/AlexHahn/LatexReusableFiles/PhysicsHeader.tex}
+\begin{document}
+\title{Quantum Information Processing: Problem Set 6}
+\author{Alex Hahn}
+\date{\today}
+\maketitle
+\setlength{\parindent}{0pt}
+
+\textbf{Problem 1}: Bell state via $\bf{X}_1\bf{X}_0$ and
+$\bf{Z}_1\bf{Z}_0$ measurement\\
+
+Consider a system of 2-Qbits. Show that the operators
+$\bf{X}_1\bf{X}_0$ and $\bf{Z}_1\bf{Z}_0$ commute and that they square to
+$\bf{1}$. We can therefore ``measure the two operators in the usual way,
+projecting onto their joint $\pm1$ eigenspaces:
+
+\begin{center}
+\includegraphics[scale=.6]{/Users/AlexHahn/Desktop/1.png}
+\end{center}
+
+The left-hand-side circuit in the above figure is the usual
+prescription for ``measuring" operators whose square is $\bf{1}$ (eqns
+5.21-5.23 of text). Show that the circuit on the right-hand-sid eis
+equivalent in this case.\\
+
+Starting from an arbitrary state
+$\ket{\Psi}=\alpha\ket{00}+\beta\ket{01}+\delta\ket{10}+\gamma\ket{11}$,
+show that the two measurements specify the same four Bell states as given in
+eqs. 6.3-6.5 of the text. To
+do this, write down the full 4-Qbit initial state, then carefully work through
+the circuit (in either of the above forms) to determine the final state, and show what
+happens for each of the four possible $x,y$ measurements.\\
+(Note that this is a simplified version of the four Qbit measurements
+$\bf{X}_a\bf{X}_b\bf{X}_c\bf{X}_d$ and $\bf{Z}_a'\bf{Z}_b'\bf{Z}_c'\bf{Z}_d'$ to be discussed in class in the description of the surface code, and illustrates the same essential features.)\\
+
+First we note that
+
+$$\text{commutivity relation}=\left\{\begin{array}{lr}
+(\bf{X}_i,\bf{Z_j})=1 & \text{, when } i\not=j\\
+(\bf{X}_i,\bf{Z_j})=-1 & \text{, when } i=j
+\end{array}\right.$$
+
+From here we can form the relation
+
+$$\bf{X}_1\bf{X}_0\bf{Z}_1\bf{Z}_0$$
+$$=-\bf{X}_1\bf{Z}_1\bf{Z}_0\bf{X}_0$$
+$$=\bf{Z}_1\bf{Z}_0\bf{X}_1\bf{X}_0$$
+
+since $\bf{X}$'s and $\bf{Z}$'s commute with themselves respectively we have
+that
+$$\bf{X}_1\bf{X}_0\bf{X}_1\bf{X}_0$$
+$$=\bf{Z}_1\bf{Z}_0\bf{Z}_1\bf{Z}_0$$
+
+applying $\bf{X}_1\bf{X}_0$ to the state we have
+
+$$\frac{1}{2}(\ket{00}\ket{\Psi}+\ket{00}\ket{\Psi}+\ket{10}\ket{\Psi}-\ket{10}\ket{\Psi})$$
+
+As for the RHS of the circuit
+
+$$\bf{C}_{02}(\bf{C}_{12}\otimes \bf{H}_3)\bf{C}_{30}\bf{C}_{31}\bf{H}_3 \ket{00}\ket{\Psi}$$
+$$=\bf{C}_{02}(C_{12}\otimes
+H_3)C_{30}C_{31}\frac{1}{\sqrt{2}}(\ket{00}\ket{\Psi}+\ket{10}\ket{\Psi})$$
+$$=\bf{C}_{02}(C_{12}\otimes
+H_3)\frac{1}{\sqrt{2}}(\ket{00}\ket{\Psi}+\ket{10}\ket{\Psi})$$
+$$=\frac{1}{2}C_{02}(\ket{00}\ket{\Psi}+\ket{01}\ket{\Psi}+\ket{10}\ket{\Psi}-\ket{11}\ket{\Psi})$$
+$$=\frac{1}{2}(\ket{00}\ket{\Psi}+\ket{00}\ket{\Psi}+\ket{10}\ket{Psi}-\ket{10}\ket{\Psi})$$
+
+Which does equal the LHS. Writing out $\ket{\Psi}$ as a superposition we can
+observe the final state for the $x,y$ measurements:
+$$\frac{1}{\sqrt{2}}(\alpha\ket{00}+\beta\ket{01}+\delta\ket{10}+\gamma\ket{11})+\frac{1}{\sqrt{2}}(\gamma\ket{00}+\delta\ket{01}+\beta\ket{10}+\alpha\ket{11})$$
+
+\textbf{Problem 2}: Double flip error correction\\
+
+Suppose the only kinds of errors one had to worry about were bit-
+ip errors, but one
+wanted to take into account not only single bit-flips ($\textbf{X}_i$), in the
+code words but also double bit-flips ($\textbf{X}_i\textbf{X}_j$,
+$i\not=j$).\\
+
+(a) Show that there is an $n$ for which the dimension of the $n$-Qbit state space is
+just large enough to accommodate mutually orthogonal two-dimensional
+subspaces for
+the uncorrupted code words and all code words suffering either single or double
+bit-flip
+corruptions. What is that $n$?\\
+
+A couple classmates have pointed out that this is analogous to the
+formulation of 5.28 in the text. We are taking a codeword and putting it in a
+1+3$n$ orthogonal 2d subspace, one 2d subspace for unperturbed
+$\ket{\Psi}$ and $3n$ subspaces for each 1 and 2 Qbit flips. We argue from
+here that the $2^k$d space spanned by the states of the $n$ Qbits
+$\subseteq$  $1+3n$ 2d subspaces implying $2^{n-1}\geq3n+1~\implies~n=5$.\\
+
+
+(b) Show for the $n$ you found in (a) that there is indeed a ``perfect" $n$-Qbit
+code that
+corrects all single and double bit-
+ip errors, by writing down the states that encode $\ket{\bar{0}}$ and
+$\ket{\bar{1}}$, and writing down a set of commuting hermitian operators whose squares
+are unity, that
+preserve both codewords, and have distinct patterns of commutations or
+anticommutations
+(show this explicitly) with each of the operators associated with all the
+single and double
+bit-flip errors.\\
+
+For codewords $\ket{00000}$ and $\ket{11111}$ and hermitian operators
+$\textbf{M}_{0-4}$ created by the set of cycling of
+$\{\textbf{Z}_0,\textbf{Z}_1,\textbf{Z}_2,\textbf{Z}_3,\textbf{Z}_4\}$ we get
+the commutivity table:
+
+$$\begin{array}{cccccc}
+ & \textbf{Z}_0\textbf{Z}_1\textbf{Z}_2\textbf{Z}_3 &
+ \textbf{Z}_1\textbf{Z}_2\textbf{Z}_3\textbf{Z}_4 &
+ \textbf{Z}_2\textbf{Z}_3\textbf{Z}_4\textbf{Z}_0 &
+ \textbf{Z}_3\textbf{Z}_4\textbf{Z}_0\textbf{Z}_1 &
+ \textbf{Z}_4\textbf{Z}_0\textbf{Z}_1\textbf{Z}_2\\
+ \textbf{X}_0 & - & + & - & - & -\\
+ \textbf{X}_1 & - & - & + & - & -\\
+ \textbf{X}_2 & - & - & - & + & -\\
+ \textbf{X}_3 & - & - & - & - & +\\
+ \textbf{X}_4 & + & - & - & - & -\\
+ \textbf{X}_0\textbf{X}_1 & + & - & - & + & +\\
+ \textbf{X}_0\textbf{X}_2 & + & - & + & - & +\\
+ \textbf{X}_0\textbf{X}_3 & + & - & + & + & -\\
+ \textbf{X}_0\textbf{X}_4 & + & - & + & + & +\\
+ \textbf{X}_1\textbf{X}_2 & - & + & - & - & +\\
+ \textbf{X}_1\textbf{X}_3 & + & + & - & + & -\\
+ \textbf{X}_1\textbf{X}_4 & - & + & - & + & +\\
+ \textbf{X}_2\textbf{X}_3 & + & + & + & - & -\\
+ \textbf{X}_2\textbf{X}_4 & - & + & + & - & +\\
+ \textbf{X}_3\textbf{X}_4 & - & + & + & + & -\\
+ \end{array}$$
+
+
+ \textbf{Problem 3}: Simple exercises in use of tables 5.2 and 5.3\\
+ (a) Suppose you are using a 5-Qbit error correcting code, and the
+ operators ($\textbf{M}_0,~\textbf{M}_1,~\textbf{M}_2,~\textbf{M}_3$) are
+ measured to have the following eigenvalues. In each case, what operator
+ should be applied to correct the state?\\
+
+(i) (+,-,+,-) = $\textbf{X}_2$\\
+(ii) (-,-,+,+) = $\textbf{Z}_3$\\
+(iii) (+,-,-,-) = $\textbf{Y}_0$\\
+
+(b) In each of these cases of preparing states in the 5-Qbit code, what
+eigenvalues of
+the 4 $\textbf{M}_i$ and $\bar{\textbf{Z}}$ were measured?\\
+(i) In order to prepare the state $\ket{\bar{1}}$, you determine that you need
+to apply $\textbf{X}_3$.\\
+
+(+,+,-,+),-\\
+
+(ii) To prepare the state $\ket{\bar{0}}$, you determine that you need to apply
+$\textbf{Y}_2$.\\
+
+(-,-,+,-),+\\
+
+
+(c) ...In each case, what operator should be applied to correct the state?\\
+
+(i) (+,+,+,+,+,-) = (+,+,+,-,-,+)\\
+
+(ii) (+,-,-,+,+,+) = (-,+,+,-,+,+)\\
+
+(iii) (-,+,-,-,+,-) = (-,-,-,+,+,+)\\
+
+\textbf{Problem 4}: Logical Operations on Codewords\\
+(consulted Andrew Casey on this problem)\\
+
+(a) ... Show that $\bar{\textbf{H}}=\textbf{H}^{\otimes5}$ does not
+implement the logical Hadamard on the codewords in the case of the 5-Qbit
+code.\\
+
+In the book it makes clear that the presence of $\textbf{X}$ and
+$\textbf{Z}$ make this 5-Qbit analog impossible. To be precise to get  the
+$\bar{\textbf{X}}$ through the operators, the $\textbf{Z}_0$ and
+$\textbf{Z}_3$ (anti-com) won't cancel if the 0 and 3 bit are
+different. (observe parity of $\textbf{Z}$'s)\\
+
+
+(b)
+
+\begin{center}
+\includegraphics[scale=.07]{/Users/AlexHahn/Desktop/2.JPG}
+\end{center}
+
+To show that the states are left invariant by $\textbf{M}_1$ observe
+
+$$\ket{\bar{0}}=2^{-3/2}(\textbf{M}_1\textbf{M}_0+\textbf{M}_1\textbf{M}_2\textbf{M}_0+\textbf{M}_2\textbf{M}_0+\textbf{M}_0+\textbf{M}_1\textbf{M}_1\textbf{M}_2+\textbf{M}_2+1)\ket{0}_7$$
+
+and
+
+$$\ket{\bar{1}}=2^{-3/2}(\textbf{M}_1\textbf{M}_0+\textbf{M}_1\textbf{M}_2\textbf{M}_0+\textbf{M}_2\textbf{M}_0+\textbf{M}_0+\textbf{M}_1+\textbf{M}_1\textbf{M}_2+\textbf{M}_2+1)\bar{\textbf{X}}\ket{\bar{0}}$$
+
+it is also shown that $\ket{\bar{1}}=\bar{\textbf{X}}\ket{\bar{0}}$
+
+\textbf{Problem 5}: Experimental realization of W-state
+$\ket{W}=\frac{1}{\sqrt{3}}(\ket{001}+\ket{010}+\ket{100})$\\
+
+(a) Write down a circuit to construct the 3-qubit W-state $\ket{W}$.
+
+\begin{center}
+\includegraphics[scale=.08]{/Users/AlexHahn/Desktop/3.JPG}
+\end{center}
+
+5 (b) Another way to construct the W-state is give by
+
+\begin{center}
+\includegraphics[scale=.8]{/Users/AlexHahn/Desktop/4.png}
+\end{center}
+
+Show that the above circuit produces the W-state up to an overall
+unobservable phase.\\
+
+
+- Struggled with a classmate for a while on it, don't really have a great
+answer\\
+
+\textbf{Problem 6}: Teleportation ``through" a Gate\\
+
+(a) Draw a circuit diagram of the six Qbits to show that if Bob applies the
+correct operators, then he'll end up with the state
+$\textbf{S}\ket{\psi_1}\ket{\psi_0}$ (i.e. the states are teleported
+``through" the gate $\textbf{S}$). In particular show that if
+$\textbf{O}_1$ and $\textbf{O}_0$ are the gates that he would need to apply
+his Qbits in the standard teleporation protocol to give the state
+$\ket{\psi_1}\ket{\psi_2}$, then he now needs to apply
+$\textbf{S}(\textbf{O}_1\otimes\textbf{O}_0)\textbf{S}^{-1}$ to arrive at
+$\textbf{S}\ket{\psi_1}\ket{\psi_0}$.\\
+
+\begin{center}
+\includegraphics[scale=.08]{/Users/AlexHahn/Desktop/awef.JPG}
+\end{center}
+
+
+(b) Show this works as well for Alice's initial Qbits in an arbitrary
+entangled state $\ket{\Phi}$, rather than in the direct product state
+$\ket{\psi_1}\ket{\psi_0}$.\\
+
+A quick computation for a given state, say a bell state,
+$\frac{1}{2}(\ket{00}+\ket{11})$ shows that we start in a bell stat, the
+cNOTs flip have the time leaving us with an equiprobability
+distribution. We can further extrapolate using symmetry and argue that this
+will always be the case regardless of input (we will always get a bell state
+output). This is because we always either apply 2 $\textbf{Z}$'s or 3
+$\textbf{X}$'s which means we either always negate (-, 2 minuses), or flip
+twice and end up in a bell state. ie always equiprobability
+$\ket{0000},\ket{0011},\ket{1100}\ket{1111}$.\\
+
+c) Unsure of what exactly i'm supposed to show?\\
+
+
+\textbf{Problem 7}: Quantum Zeno II\\
+
+(i) We can describe the probability of a final state of $\ket{0}=0$ by
+$$R_{\pi/4}QR_{\pi/4}\ket{0}=R_{\pi/4}R_{\pi/4}\ket{0}=\ket{1}$$
+
+For an exploding gate we have a .25 probability that the final state ends up
+as $\ket{0}$. This is due to basic probability in that after the first rotation
+we have .5 probability of measuring 1 (and exploding) and with a
+consecutive measurement another .5 probability of getting a $\ket{0}$ or
+$\ket{1}$ so an final state of $\ket{0}$ =.5$\cdot$.5=.25\\
+
+(ii) the probability of a final state being $\ket{0}=0$:
+
+$$(QR_{\pi/2N})^N\ket{0}=(R_{\pi/2N}^N\ket{0}=ket{1}$$
+
+we have a 1/$N$ probability for an exploding gate; after the first $R$ we know
+that there is a 1/$N^2$ chance of measuring a 1 (and exploding)
+otherwise we end up back in state $\ket{0}$. Combinatorically this sequence
+repeats and with $N$ times we see that $(N)(1/N^2)=1/N$ for the chance of
+exploding bomb.\\
+
+
+\textbf{Problem 8}: Surface code\\
+
+Me and the two kids I'm working with (Andrew Casey and Eric Shuh) have a slight problem/
+discrepency with the numbers given in the problem (and wolfram alpha does not
+seem to have a stable/ reliable numerical method to solve the choose
+computation). Either way, giving answers in the form of a tuple
+$$(p_L,d,n_q)$$
+we find
+$$(10^{-10},14,729)$$
+$$(10^{-20},27,2809)$$
+$$10^{-30},32,3969)$$
+
+I've checked with a couple other classmates and something seems to be off/
+doesn't line up. Solving the formula for $n_q$ we get a $d$ of about 30 giving a
+$p_L$ on the order of 10$^{-22}$. $n_q=3500\implies\text{error rate of
+}10^{-17}$?
+
+
+
+
+
+
+
+
+
+
+
+
+\end{document}

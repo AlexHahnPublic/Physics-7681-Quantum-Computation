@@ -1,0 +1,208 @@
+\documentclass[a4paper,11pt]{article}
+\usepackage{amsmath}
+\usepackage{amsthm}
+\usepackage[parfill]{parskip}
+\usepackage{color}
+\usepackage[norelsize,ruled, vlined]{algorithm2e}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage{fancyhdr}
+\usepackage{enumerate}
+\usepackage{tikz}
+\usepackage{pgfplots}
+\usepackage{hyperref}
+\usetikzlibrary{decorations.markings}
+\input{Qcircuit.tex}
+\DeclareMathAlphabet{\mathpzc}{OT1}{pzc}{m}{it}
+\usepackage[margin = 1.0in]{geometry}
+\pagestyle{fancy}
+\lhead{Andrew Casey acc248}
+\chead{CS 4812}
+\rhead{HW2 2/25/14}
+
+\newtheorem*{mydef}{Definition}
+\newtheorem*{thm}{\\ Theorem}
+\newtheorem*{lem}{\\ Lemma}
+\newtheorem*{claim}{\\ Claim}
+\newtheorem*{defn}{\\ Definition}
+\newtheorem*{prop}{\\ Proposition}
+
+\DeclareMathOperator{\N}{\mathbb{N}}
+\DeclareMathOperator{\Z}{\mathbb{Z}}
+\DeclareMathOperator{\Q}{\mathbb{Q}}
+\DeclareMathOperator{\R}{\mathbb{R}}
+\DeclareMathOperator{\F}{\mathbb{F}}
+\DeclareMathOperator{\C}{\mathbb{C}}
+
+\begin{document}
+\subsubsection*{Problem 1}
+\emph{\color{red} Come back and write out what the $|\Phi_x\rangle$ for one part just to demonstrate you know what it means and also reference (1.78) and (1.79)}
+\begin{enumerate}[a)]
+    \item The probability that the 3 Qbits are measured simultaneously to be (1,0,1) is given by $|\alpha_{101}|^2$. The Qbits will be left in state $|101\rangle$ after the measurement.
+    \item The probability that Qbit 2 is measured to be (1) is given by $|\alpha_1|^2$ and the Qbits will be left in state $|1\rangle|\Phi_1\rangle_2$.
+    \item The probability that Qbits 2,1 are measured simultaneously to be (1,0) is given by $|\alpha_{10}|^2$. The Qbits will be left in state $|10\rangle|\Phi_{10}\rangle_1$ after the measurement.
+    \item The probability that Qbit 2 is measured to be (1) is given by $|\alpha_1|^2$ and the Qbits will be left in state $|1\rangle|\Phi_1\rangle_2$. Then, the probability that Qbit 1 is measure to be (0) is given by $|\alpha_0|^2$ and the Qbits will be left in state $|1\rangle|0\rangle|\Phi_{10}\rangle_1=|10\rangle|\Phi_{10}\rangle_1$.
+    \item The probability that Qbits 2,1 are measured simultaneously to be (1,0) is given by $|\alpha_{10}|^2$. The Qbits will be left in state $|10\rangle|\Phi_{10}\rangle_1$ after the measurement. Then, the probability that Qbit 0 is measure to be (1) is given by $|\alpha_1|^2$ and the Qbits will be left in state $|1\rangle|0\rangle|1\rangle=|101\rangle$.
+\end{enumerate}
+\subsubsection*{Problem 2}
+\begin{enumerate}[a)]
+    \item We introduce $u$ such that $r+s+u=n$. We can then write:
+        $$|\Psi\rangle_n=\sum\limits_{x,y,z}\alpha_{xyz}|x\rangle_r|y\rangle_s|z\rangle_u$$
+        If we measure the first $r$ Qbits, we will measure $x$ with probability:
+        $$p(x)=\sum\limits_{y,z}|\alpha_{xyz}|^2$$
+        and the Qbits will be left in the state:
+        $$|x\rangle_r|\Phi_x\rangle_{s+u}=|x\rangle_r\frac{1}{\sqrt{p(x)}}\sum\limits_{y,z}\alpha_{xyz}|y\rangle_s|z\rangle_u$$
+        If we then measure the next $s$ Qbits, we will measure $y$ with probability:
+        $$p(y|x)=\sum\limits_{z}|\frac{\alpha_{xyz}}{\sqrt{p(x)}}|^2$$
+        and the Qbits will be left in the state:
+        $$|x\rangle_r|y\rangle_s|\Phi_{xy}\rangle_{u}=|x\rangle_r|y\rangle_s\frac{1}{\sqrt{p(y|x)}}\frac{1}{\sqrt{p(x)}}\sum\limits_{z}\alpha_{xyz}|z\rangle_u$$
+    \item If we measure $r+s$ Qbits all at once, we measure $xy$ with probability:
+        $$p(xy)=\sum\limits_{z}|\alpha_{xyz}|^2$$
+        and the Qbits will be left in the state:
+        $$|x\rangle_r|y\rangle_s\frac{1}{\sqrt{p(xy)}}\sum\limits_{z}\alpha_{xyz}|z\rangle_u$$
+        We then make the observation that $p(xy)=p(x)p(y|x)$ and thus $\frac{1}{\sqrt{p(y|x)}}\frac{1}{\sqrt{p(x)}}=\frac{1}{\sqrt{p(xy)}}$ observe that the result from part a is indeed the same as the result here.
+    \item $$\alpha_x^2=\sum\limits_{0\leq x^\prime<2^{m+n}}|\gamma_{x^\prime}|^2$$
+\emph{\color{red} Not sure about this one}
+\end{enumerate}
+\subsubsection*{Problem 3}
+\begin{enumerate}[a)]
+    \item I would say that the setup of this question could provide some statistic sampling about the upper Qbit. After the first cNOT gate, the Qbits will become entangled and share the state:
+        $$\alpha|00\rangle + \beta|11\rangle$$
+        When we measure the lower Qbit, Born's rule tells us that we'll measure a 0 or 1 with probability $|\alpha|^2$ or $|\beta|^2$ respectively and subsequently unentangle the states and collapse the state of the lower Qbit. Now, the lower Qbit is in state $|0\rangle$ or $|1\rangle$. If it's in state $|0\rangle$. Then we fall into the same case as in observing the first gate. If it's in state $|1\rangle$ then we observe that the cNOT gate will act and the Qbits will become entangled and share the state:
+        $$\alpha|01\rangle + \beta|11\rangle$$
+        When we measure the lower Qbit now (which is represented here as Qbit 0), Born's rule tells us that we'll measure a 1 or 0 with probability $|\alpha|^2$ or $|\beta|^2$ respectively and subsequently unentangle the states and collapse the state of the lower Qbit. Thus, we see the patterns that can occur and observe that everytime we make a measurement, the lower Qbit will be the same as the last measurement with probability $|\alpha|^2$. It will be different from the last measurement with probability $|\beta|^2$. Thus, we simply keep track of the number of times that the measurement changes. If the measurement changes $x$ times, we can write our estimated probability $|\beta_e|^2$ as:
+        $$|\beta_e|^2=\frac{x}{N}$$
+        where our esimate has a margin of error ($\epsilon$) where $|\beta_e-\beta|<\epsilon$ at a confidence level denoted by $Z$ and given by the $Z$-value of a normal distribution. Note that $\epsilon=\frac{Z}{2\sqrt{N}}$, thus we can choose our confidence level and $N$ based on whatever error we would like to allow. This also allows us to find the value of $\alpha$ by the normalization constraint or by the same process as above (keeping track of the number of times the measurement doesn't change).
+    \item This actually makes things worse as this adds a greater level of uncertainty to every measurement we're making.
+\emph{\color{red} Do I need more than this?}
+\end{enumerate}
+\subsubsection*{Problem 4}
+\begin{enumerate}[a)]
+    \item If we utilize the identity $\mathsf{Z}R_\theta\mathsf{Z}=R_-\theta$, we observe:
+        $$F_\theta\equiv R_\theta\mathsf{Z}R_{-\theta}=R_\theta\mathsf{Z}\mathsf{Z}R_\theta\mathsf{Z}=R_\theta R_\theta\mathsf{Z}$$
+        which in this form shows that we perform a reflection of a the vertical direction following by two rotations by $\theta$ which is exactly a relection about an axis at angle $\theta$ clockwise from the horizontal. We also observe that:
+        $$F_\theta=\left( \begin{array}{cc} \cos^2\theta-\sin^2\theta & 2\sin\theta\cos\theta \\ 2\sin\theta\cos\theta & \sin^2\theta-\cos^2\theta \end{array} \right)$$
+        Thus, $$F_{\pi/8}=\left( \begin{array}{cc} \frac{1}{\sqrt{2}} &  \frac{1}{\sqrt{2}}\\  \frac{1}{\sqrt{2}}& -\frac{1}{\sqrt{2}}\end{array} \right)=\mathsf{H}$$
+        Next, if we place a a half wave plate $\mathsf{H}=F_{\pi/8}$ before a $P_v$ we observe that the fraction of initially $h$-polarized light that transmits is $\cos^2(\frac{\pi}{2}+\frac{2\pi}{8})=0.5$ and the fraction of $v$-polarized light that transmits is $\cos^2(\frac{2\pi}{8})=0.5$. Meanwhile the fraction of $\pi/4$-polarized light that transmits is equal to $\cos^2(\frac{\pi}{4}+\frac{2\pi}{8})=1$.
+    \item \begin{enumerate}[(i)]
+            \item An $h$-polarized photon emerges with a polarization angle of $\frac{\pi}{3}$. A $\pi/6$-polarized photon emerges with vertical polarization ($\frac{\pi}{2}$).
+            \item If $n=1$ the photon will emerge vertically polarized with probability 1. Otherwise the photon will have no chance of emerging vertically polarized.
+        \end{enumerate}
+    \item \begin{enumerate}[(i)]
+            \item The probability of passing through both $P_{\pi/4}$ and $P_v$ is $0.5*0.5=.25$.
+            \item The probability of passing through all $N$ in the limit $N$ large is equal to 1. This can be seen as if we look at the first polarizer, for $N$ large, the angle of polarization goes to 0. The difference between each subsequent polarizer also goes to 0 and thus the probability of passing through each subsequent polarizer is 1.
+\end{enumerate}
+\end{enumerate}
+
+\subsubsection*{Problem 5}
+We start by illustrating the circuit diagram for the problem:
+        $$\Qcircuit @C=1em @R=.7em {
+\lstick{\ket{x}}& \multigate{2}{U_f} & \rstick{\ket{x}}\qw \\
+\lstick{\ket{y}}& \ghost{U_f}& \rstick{\ket{y}}\qw \\
+\lstick{\ket{z}}& \ghost{U_f} & \rstick{\ket{z\oplus f(\ket{xy})}}\qw
+}$$
+\begin{enumerate}[a)]
+    \item
+        $\Qcircuit @C=1em @R=.7em {
+& \multigate{2}{U_f} & \qw \\
+& \ghost{U_f} & \quad\quad\quad=\qw \\
+& \ghost{U_f} & \qw
+}  \quad\quad\quad
+        \Qcircuit @C=1em @R=1em {
+             &\qw & \qw & \qw &\qw\\
+             &\qw & \qw & \qw & \qw\quad\quad\quad\quad = f_{0000}\\
+             &\qw & \qw & \qw & \qw
+         }\quad\quad\quad\quad\quad\quad
+         \Qcircuit @C=1em @R=.7em {
+& \multigate{2}{U_f} & \qw \\
+& \ghost{U_f} & \quad\quad\quad=\qw \\
+& \ghost{U_f} & \qw
+}  \quad\quad\quad
+        \Qcircuit @C=1em @R=1em {
+             &\qw & \ctrl{2} & \qw &\qw\\
+             &\qw & \qw & \qw & \qw\quad\quad\quad\quad = f_{0101}\\
+             &\qw & \targ & \qw & \qw
+         }$
+         \\\\
+        $\Qcircuit @C=1em @R=.7em {
+& \multigate{2}{U_f} & \qw \\
+& \ghost{U_f} & \quad\quad\quad=\qw \\
+& \ghost{U_f} & \qw
+}  \quad\quad\quad
+        \Qcircuit @C=1em @R=1em {
+             &\qw & \qw & \qw &\qw\\
+             &\qw & \ctrl{1} & \qw & \qw\quad\quad\quad\quad = f_{0011}\\
+             &\qw & \targ & \qw & \qw
+         }\quad\quad\quad\quad\quad\quad
+         \Qcircuit @C=1em @R=.7em {
+& \multigate{2}{U_f} & \qw \\
+& \ghost{U_f} & \quad\quad\quad=\qw \\
+& \ghost{U_f} & \qw
+}  \quad\quad\quad
+        \Qcircuit @C=1em @R=1em {
+             &\qw & \ctrl{2} & \qw &\qw\\
+             &\qw & \qw & \qw & \qw\quad\quad\quad\quad = f_{1010}\\
+             &\targ & \targ & \qw & \qw
+         }$
+         \\\\
+        $\Qcircuit @C=1em @R=.7em {
+& \multigate{2}{U_f} & \qw \\
+& \ghost{U_f} & \quad\quad\quad=\qw \\
+& \ghost{U_f} & \qw
+}  \quad\quad\quad
+        \Qcircuit @C=1em @R=1em {
+             &\qw & \qw & \qw &\qw\\
+             &\qw & \ctrl{1} & \qw & \qw\quad\quad\quad\quad = f_{1100}\\
+             &\targ & \targ & \qw & \qw
+         }\quad\quad\quad\quad\quad\quad
+         \Qcircuit @C=1em @R=.7em {
+& \multigate{2}{U_f} & \qw \\
+& \ghost{U_f} & \quad\quad\quad=\qw \\
+& \ghost{U_f} & \qw
+}  \quad\quad\quad
+        \Qcircuit @C=1em @R=1em {
+             &\qw & \qw & \qw &\qw\\
+             &\qw & \qw & \qw & \qw\quad\quad\quad\quad = f_{1111}\\
+             &\qw & \targ & \qw & \qw
+         }$
+    \item
+\end{enumerate}
+\subsubsection*{Problem 6}
+\begin{enumerate}[a)]
+    \item In the worst case, $2^{n-1}+1$ evaluations of $f$ are needed. This is because at worst, we would observe half of the evaluations as being the same and we would then have to observe one more evaluation to see whether $f$ is balanced or constant. In the best case, we would only need $2^1$ evaluations as we would simply check the first two evaluations and if they're different, we know $f$ is balanced. The probability of the worst case is given by:\\
+        $$.50+.50\left(\frac{(\frac{n}{2}-1)!}{\frac{(n-1)!}{(\frac{n}{2}-1)!}}\right)=.50+.50\left(\frac{1}{(n-1)!}\right)$$
+        The probability of the best case is given by:
+        $$.50\left(\frac{\frac{n}{2}}{n-1}\right)=.50\left(\frac{n}{2n-2}\right)$$
+    \item \emph{\color{red} Need to tex this}
+\end{enumerate}
+\subsubsection*{Problem 7}
+For some preliminary observations, we say that Alice's Qbit can be described by $\alpha_0\ket{0}+\alpha_1\ket{1}$ and Bob's can be described by $\beta_0\ket{0}+\beta_1\ket{1}$. Their entangled state can thus be described by $\alpha_0\beta_0\ket{00}+\alpha_0\beta_1\ket{01}+\alpha_1\beta_0\ket{10}+\alpha_1\beta_1\ket{11}$. Then we can create the constraint \begin{align}
+    \alpha_0\beta_0&=\frac{1}{\sqrt{2}}=\alpha_1\beta_1\\
+    \alpha_0\beta_1&=0=\alpha_1\beta_0
+\end{align}
+\begin{enumerate}[a)]
+    \item If $x=y=0$ then neither Alice nor Bob make any changes to their Qbits. Thus, $a\oplus b=0=xy$ with probability 1. This is because Alice and Bob share the state $\frac{1}{\sqrt{2}}(\ket{00}+\ket{11})$, and Alice/Bob can measure a 0 or a 1 with probability of $\frac{1}{2}$. However, once one of them measures a 0 or 1, the other one will then make the same measurement due to the entangled state. Thus, they will make the same measurement 100\% of the time.
+    \item We show this part for $x=1$. We observe that Alice can apply her unitary matrix as follows:
+        $$R_{\pi/6}\left(\begin{array}{c} \alpha_0 \\ \alpha_1\end{array}\right)=\left(\begin{array}{c} \frac{\alpha_0\sqrt{3}}{2}-\frac{\alpha_1}{2} \\ \frac{\alpha_1\sqrt{3}}{2}+\frac{\alpha_0}{2}\end{array}\right)$$
+        Then, our entangled state becomes:
+        $$\left(\frac{\alpha_0\sqrt{3}}{2}-\frac{\alpha_1}{2}\right)\beta_0\ket{00}+\left(\frac{\alpha_0\sqrt{3}}{2}-\frac{\alpha_1}{2}\right)\beta_1\ket{01}+\left(\frac{\alpha_1\sqrt{3}}{2}+\frac{\alpha_0}{2}\right)\beta_0\ket{10}+\left(\frac{\alpha_1\sqrt{3}}{2}+\frac{\alpha_0}{2}\right)\beta_1\ket{11}$$
+        And if we apply our constraints from (1) and (2) we see that this simplifies to:
+        $$\frac{\sqrt{6}}{4}\ket{00}+\frac{1}{2\sqrt{2}}\ket{01}+\frac{1}{2\sqrt{2}}\ket{10}+\frac{\sqrt{6}}{4}\ket{11}$$
+        We then see that the probability that Alice and Bob make the same measurement is equal to $\frac{6}{16}+\frac{6}{16}=\frac{3}{4}=.75$. Then $a\oplus b = xy = 0$ and Alice and Bob win with probability .75.
+    \item With both Alice and Bob applying their unitary matrices, and utilizing the constraints (1) and (2), we can see that the entangled state before measurement is:
+        $$\frac{1}{2\sqrt{2}}\ket{00}+\frac{2\sqrt{3}}{4\sqrt{2}}\ket{01}+\frac{2\sqrt{3}}{4\sqrt{2}}\ket{10}+\frac{1}{2\sqrt{2}}\ket{11}$$
+        We can then see that Alice and Bob will make different measurements with probability $\frac{3}{8}+\frac{3}{8}=\frac{3}{4}=.75$. Thus, $a\oplus b = 1=xy$ and Alice and Bob win $\frac{3}{4}$ of the time.
+    \item We know that $x=y=0$ can occur with probability .25, $x\neq y$ with probability .50, and $x=y=1$ with probability .25. Thus, we can sum the likelihood they'll win for each event as follows:
+        $$.25(1)+.50(.75)+.25(.75)=.8125$$
+        Thus Alice and Bob win with overall probability of $.8125=\frac{13}{16}$.
+    \item
+\end{enumerate}
+\subsubsection*{Problem 8}
+\emph{\color{red} Started this one and now not so sure about it.}
+\begin{enumerate}[a)]
+\item $$\mathsf{u}(\hat{x},\pi)=e^{i\frac{\pi}{2}\bar{x}\cdot\vec{\sigma}}=\left(\begin{array}{cc} 1 & i \\ i & 1 \end{array}\right)\quad\quad\quad\mathsf{u}(\hat{y},\pi)=e^{i\frac{\pi}{2}\bar{y}\cdot\vec{\sigma}}=\left(\begin{array}{cc} 1 & e^{-i} \\ e^i & 1 \end{array}\right)$$
+    $$\mathsf{u}(\hat{x},\pi)\cdot\mathsf{u}(\hat{y},\pi)=\left(\begin{array}{cc} 1+ie^i & i+e^{-i} \\ i+e^i & 1+ie^{-i} \end{array}\right)$$
+    $$\mathsf{u}(\hat{y},\pi)\cdot\mathsf{u}(\hat{x},\pi)=\left(\begin{array}{cc} 1+ie^{-i} & i+e^{-i} \\ i+e^i & 1+ie^{i} \end{array}\right)$$
+    \item
+\end{enumerate}
+\end{document}

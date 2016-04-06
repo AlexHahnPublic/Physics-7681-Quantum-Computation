@@ -1,0 +1,456 @@
+\input{/Users/AlexHahn/LatexReusableFiles/PhysicsHeader.tex}
+\setlength{\parindent}{0pt}
+\begin{document}
+\title{Physics 7681, Problem Set 2}
+\author{Alex Hahn}
+\date{\today}
+\maketitle
+
+\textbf{Problem 1:} Generalized Born Rule I\\
+
+In class we covered section 1.9 of the course text, which showed that
+successive measurements of Qbits gives results with same probabilities as
+measuring all at once. Let's see how this works explicitly in a simple case by
+considering the most general 3-Qbit state
+
+$$\ket{\Psi}=\sum_{x=0}^7\alpha_x\ket{x}_3=\alpha_{000}\ket{0}\ket{0}\ket{0}+\alpha_{001}\ket{0}\ket{0}\ket{1}+\alpha_{010}\ket{0}\ket{1}\ket{0}+\alpha_{011}\ket{0}\ket{1}\ket{1}+\alpha_{100}\ket{1}\ket{0}\ket{0}+\alpha_{101}\ket{1}\ket{0}\ket{1}+\alpha_{110}\ket{1}\ket{1}\ket{0}+\alpha_{111}\ket{1}\ket{1}\ket{1},$$
+(where $\sum_x|\alpha_x|^2=1$). The 3 Qbits are labelled from the left: Qbit
+2, Qbit 1, Qbit 0. For Qbits prepared in the above state, what is the
+probability of the measurement ($x$), and in what state are the Qbits left
+after the measurement, for each of the following cases:\\
+
+a) The 3 Qbits 2,1,0 are measured simultaneously to be (1)\\
+
+This is simply the amplitude of the corresponding state in the superposition
+of states, from our our this is simply $|\alpha_{101}|^2$. Since we have
+collapsed (reduced the state) so it must be in the state $\ket{101}$ after
+measurement\\
+
+b) Qbit 2 is measured to be (1)\\
+
+We have several terms in the superposition that hold some $alpha$ amplitude
+(probability) that the second Qbit will be 1. The corresponding probability is
+the sum of the probability of these states (assuming our Wave function has
+already been normalized):
+$|\alpha_{100}|^2+|\alpha_{101}|^2+|\alpha_{110}|^2+|\alpha_{111}|^2$. The
+state of the Qbits left after the measurement is a product state,
+$\ket{1}_1\ket{\Phi_1}_2$, where $\ket{\Phi_1}$ is normalized (but once again not
+necessarily orthogonal)\\
+
+c) Qbits 2,1 are measured simultaneously to be (1,0)\\
+
+This corresponds to only two terms (states) in our superposition of states
+with sum probability $|\alpha_{100}|^2+|\alpha_{101}|^2$. To find the what
+state the Qbits are left in requires applying the most general form of Borns
+rule with $\ket{\Psi}_{2+1}=\sum^{2^2}_{x=0}\alpha_x\ket{x}_m\ket{\Phi_x}_1$
+which after measurement the state of all $m+n$ (3) Qbits will be the product
+state $\ket{10}_2\ket{\Phi_{10}}_1$ (the $m$ measured Qbits are in state
+$\ket{10}_2$ and the $n$ unmeasured ones are in state $\ket{\Phi_{10}}_1$.\\
+
+d) First Qbit 2 is measured to be (1), then Qbit 1 is measured to be (0)\\
+
+We could apply Born's rule with $m=2$ and $n=1$ but since we know that
+successive measurements are equivalent to simultaneous ones (probability is
+conserved) we know the probability is equivalent to our previous example,
+using Born's rule we could explicitly write the resulting state as $\ket{1}_1\ket{0}_1\ket{\Phi_{10}}_1$
+to make explicit that two measurements were made consecutively.
+(we could even separate the into two different $\ket{\Phi}$'s if we were to
+truly apply Born's rule each time).\\
+
+e) First Qbits 2,1 are measured to be (1,0), then Qbit 0 is measured to be (1)\\
+
+Similar to d) we know that this is the same probability as a). We could write
+this out as 2 applications of Born's rule with the resulting $\ket{\Phi}_0$ state being a delta function (it's only possible for it to have the observed state
+after measured). Applying Born's rule gives $\ket{10}_2\ket{1}_1\ket{\Phi_{101}}_0$ (once again combining the $\Phi$'s instead of writing out twice), but its really just the observed state itself,
+$\ket{101}$\\
+
+\textbf{Problem 2:}
+The most powerful version of the Born rule is in the form stated at the end of
+section
+1.9 (eqs. (1.80)–(1.81)). The rule notes that the general state of $m+n$ Qbits
+can be written
+$$\ket{\Psi}_{m+n}=\sum_{0\leq x<2^m}\alpha_x\ket{x}_m\ket{\Phi_x}_n,$$
+where $\sum_x|\alpha_x|^2=1$ and states $\ket{\Phi_x}_n$ are normalized, but
+not necessarily orthogonal. The rule asserts that if only the $m$ Qbits
+associated with the states $\ket{x}_m$ above are measured, then with
+probability $|\alpha_x|^2$ the result will be $x$, and after the measurement
+the state of all $m+n$ Qbits will be the product state
+$$\ket{x}_m\ket{\Phi_x}_n,$$
+in which the $m$ measured Qbits are in the state $\ket{x}_m$ and the $n$
+unmeasured ones are in the state $\ket{\Phi_x}_n$. The following confirms that
+this rule satisfies the reasonable requirement that measuring $r$ Qbits and
+then immediately measuring $s$ more, is exactly the same as measuring the
+$r_s$ Qbits all at once:\\
+
+
+(a) Given $n$ Qbits in the state $\ket{\Phi}_n$, suppose $r$ of the Qbits are
+measured, immediately after which $s$ additional Qbits are measured (with
+$r+s<n$). Find the possible states of the $n$ Qbits after the two measurements
+and their associated probabilities, by first applying the rule to the $r-$Qbit
+measurement and then applying the rule a second time to the subsequent
+$s$-Qbit measurement.\\
+
+After the first measurement, using the generalized Born rule, after the first
+measurement of $r$ Qbits we are left with the product state
+
+$$\ket{x}_r\ket{\Phi_x}_{n-r}$$
+
+Now we apply the generalized Born rule again to this state but this time now
+measuring $s$ Qbits
+
+$$\ket{y}_s\ket{x}_r\ket{\Phi_x}_{n-r}\ket{\Phi_y}_{n-(r+s)}$$
+
+From page 29 we know that the $\ket{\Phi}$'s carry $\alpha$ probabilities that
+multiply the inverse phase factor. We then can compute that after the first
+$r$ Qbit measurement we get a $\frac{1}{\sqrt{p(x)}}$ term, and after the $s$ Qbit
+measurement we get a factor of $\frac{1}{\sqrt{p(y)}}$. Putting this all together we
+have
+
+$$\ket{y}_s\ket{x}_r\ket{\Phi_x}_{n-r}\ket{\Phi_y}_{n-(r+s)}=\ket{y}_s\ket{x}_r\ket{\Phi_xy}_{n-(r+s)}=\ket{y}_s\ket{x}_r\frac{1}{\sqrt{p(y)}}\frac{1}{\sqrt{p(x)}}\sum_x\alpha\ket{x^*}_{n-(r+s)}$$
+
+where $x^*$ is it's own distinct state\\
+
+(b) Show that the result of (a) is the same as would be found, more simply by
+just applying the rule a single time to a single measurement of all $r+s$
+Qbits\\
+
+Applying the generalized born rule we would have
+
+$$\ket{xy}\ket{\Phi_{xy}}_{n-(s+r)}$$
+
+and in terms of the probabilities we see it result in the same as in part (a)
+because
+
+$$\frac{1}{\sqrt{p(x)}}\frac{1}{\sqrt{p(y)}}=\frac{1}{\sqrt{p(xy)}}$$
+
+The RHS being our single $r+s$ measurement. We'd overall have
+
+$$\ket{xy}_{r+s}\frac{1}{\sqrt{p(xy)}}\sum_x\alpha\ket{x^*}_{n-(r+s)}$$
+
+In classical physics this is analogous to how throwing a dice twice
+(consecutively) is the same as throwing 2 identical dice at once.\\
+
+(c) We can also write the above state in the full basis of $m+n$ Qbits as
+$\ket{\Psi}_{m+n}=\sum_{0\leq x'<2^{m+n}}\gamma_{x'}\ket{x'}$. Write down an
+expression for the $\alpha_x$ in terms of the amplitudes $\gamma_{x'}$.\\
+
+I believe that the physical interpretation of this is that we are writing the wave function (superposition of states)
+$\ket{\Psi}_{m+n}$ in a basis that is more directly related to the post $m$ Qbit
+measurement ie the still  undeterministic (not collapsed) $\ket{\Phi}$ function (superposition of states). If that makes since then these are just ``updated" $alpha$ coefficients. I think you might be able to get them by, once you observe the $m$ Qbits, by using the normalization condition on the resulting product state. This would mean the original $\alpha$ coefficients would be 1/$\gamma(x)$ for each corresponding coefficient\\
+
+
+\textbf{Problem 3:} Indirect measurement of Qbit amplitudes?\\
+
+a) Suppose the upper Qbit starts in the state $\alpha\ket{0}+\beta\ket{1}$ anf
+the lower Qbit starts in the state $\ket{0}$, as depicted above. Can some long
+sequence of cNOT gates followed by measurement gates give some statistical
+sampling of the state of the upper Qbit, i.e. canthe above arrangement with
+some largeg number $N$ of cNOT/ measurement gate pairs be used to estimate the
+values of $|\alpha|^2$ and $|\beta|^2$ without collapsing the Qbit state?
+Characterize
+the outputs of the measuring devices and the final states above after some
+number of
+measurements.\\
+
+This seems to violate the no cloning theorem: because we collapsed some wave function by measurement we can't simply restore it to its original state by applying an
+entangling operator to it (in this case cNOT) then perform a measurement
+again and repeat the process many times. Just by re-entangling the 2
+Qbits we don't guarantee that the probabilistic amplitudes are the same in the
+entire system each time. Only if the upper Qbit was in a pure state could accurate
+statistical inferences be made (ie either almost all probability $\ket{0}$ or
+all probability $\ket{1}$. The final state will just be the 0 or 1 state
+observed after the first measurement flipped $N$ (or $N-1$) times (or
+following the straightforward operations on the $\ket{0}$ or $\ket{1}$ state.\\
+
+If you want to get into the quantum parallelism (even multi-worlds argument)
+you'd argue that one you make that first measurement you've determined what
+``world" you were in, you couldn't take advantage of more calculation(s) done
+in parallel universes). This is also analogous to a classical example of two
+billiard balls with a know Hamiltonian describing the system hitting each
+other then separating light years apart. If you observe one and measure its
+properties, you can't re-hit it (or do whatever to it) and take more
+measurements, then do the same over and over to sketch out some probabilistic  wave function of the other
+ball... once you observed it once, you determined the other ball's state\\
+
+b) Even though the part a) doesn't correctly sample indeterministic quatum
+states adding the additional Qbit I think actually makes things worse. I think
+this because in the diagram 3 CNOT operators are applied before any
+measurement is made. The first Qbit might be more affected by this more
+complicated system due to interactions with the ``program" and our initial
+measurement might not reflect anything about the original Qbit, it might in
+theory be the same as part a) though\\
+
+\textbf{Problem 4} Classical light and quantum photon polarizations\\
+The polatization of either a single photon or classical light (lots of
+photons) is described by a two dimensional unit vector in the plane transverse
+to its direction of motion. Consider photons(s) polarized at an angle $\theta$
+from the horizontal ($0\leq\theta<\pi$ since we're not concerned with an
+overall phase). Let $P_\theta$ denote a polarizer oriented at angle $\theta$
+from the horizontal (where $P_h\equiv P_0$ and $P_v\equiv P_{\pi/2}$ denote
+horizontal and vertical polarizers, respectively). In classical
+electrodynamics, $h$-polarized light with intensity $I_0$ incident on
+$P_\theta$ emerges with polarization $\theta$ and intensity $I_0\cos
+^2\theta$. In quantum mechanics, each individual photon in the light beam
+starts $h$-polarized and has a probability $\cos^2\theta$ of transmission
+(otherwise absorbed), resulting in the observed wave behavior for large
+numbers of photons.\\
+
+Let $R_\theta=\mat{\cos\theta & -\sin\theta \\ \sin\theta & \cos\theta}$ and
+$Z=\mat{1 & 0\\ 0 & -1}$ act, respectively, as rotation of the polarization
+plane, and reflection of the vertical direction (the action of a half-wave
+plate that flips the vertical component of polarization, i.e., reflects about
+the horizontal axis). Note that $ZR_\theta Z=R_\theta$.\\
+
+a) Show that $F_\theta\equiv R_\theta Z R_{-\theta}$ reflects about an axis at
+angle $\theta$ clockwise from the horizontal (half-wave plate rotated by
+$\theta$), and confirm that $H=F_{\pi/8}$ (Hadamard is realized by a half-wave
+plate at an angle of $22.5^\circ$). Now consider a light beam polarized at
+$\theta=\pi/4$. According to the above the above formula, half the intensity
+would transmit through $P_h$, and half through $P_v$. It is tempting to
+imagine that $\pi/4$-polarized light consists of equiprobability parts $h$ and
+$v$ polarized light. To assess that possibility, consider placing a half-wave
+plate $H=F_{\pi/8}$ before a $P_v$. What fraction of the intensity of initially $h$-polarized light would transmir $I_h\rightarrow F_{\pi/8}\rightarrow P_v\rightarrow ?$, and what fraction of initially $v$-polarized light $I_v\rightarrow F_{\pi/8}\rightarrow P_v\rightarrow ?$ Compare to the fraction of $\pi/4$-polarized light that transmits $I_{\pi/4}\rightarrow F_{\pi/8}\rightarrow P_v\rightarrow$ ? to infer that the latter can't consist of equiprobability parts $h$ and $v$. (Note this is the same argument as after eq. 1.72) in the book for a single photon.)\\
+
+I believe that there are 2 ways to show this. The purely mathematical way
+would be to show that $F_\theta=R_\theta Z R_{-\theta}$ maps the unit basis
+vectors to a reflection at an angle $\theta$ clockwise from the horizontal,
+since we are given all the matrices this is quite computationally possible but a
+little tedious. Another way to show it is to take advantage of the given
+identity $ZR_\theta Z=R_{-\theta}$. This would mean
+
+$$F_\theta\equiv R_\theta Z R_{-\theta}=R_\theta ZZ R_\theta Z = R_\theta
+R_\theta Z$$
+since we perform two equal rotations it is clear / straightforward to
+determine the line that we equivalently reflected over ($\theta$ degrees from
+the horizontal)\\
+
+For the second part of the first question First we multiply out the actual
+matrices $R_\theta Z R_{-\theta}=F_\theta$ to get
+$$F_\theta=\mat{\cos^2\theta-\sin^2\theta & 2\sin\theta\cos\theta\\
+2\sin\theta\cos\theta & \sin^2\theta-\cos^2\theta}$$
+
+solving for $\theta=\pi/8$ we get
+
+$$\mat{\frac{1}{\sqrt{2}} & \frac{1}{\sqrt{2}}\\ \frac{1}{\sqrt{2}} &
+-\frac{1}{\sqrt{2}}}$$
+
+which is the Hadamard $H$ operator.\\
+
+For the last part (three parts) of the question: the fraction of initially
+$h$-polarized light that transmits when a half wave plate $H$ is placed before a
+$P_v$ is $\cos^2(\pi2+2\pi/8)=.5$, similarly the fraction of $v$-polarized
+light that transmits is $\cos^2(2\pi/8)=.5$. However the fraction of
+$\frac{\pi}{4}$-polarized light that transmits is $\cos^2(\pi/4+2\pi/8)=1$\\
+
+b) (i) Now consider the effect of $F_{\pi/6}Z$ on a polarization state, e.g.,
+with what polarization does an $h$ polarized photon emerge, $h\rightarrow Z\rightarrow F_{\pi/6}\rightarrow ?,$ and similarly for a $\pi/6$-polarized photon, $\pi/6\rightarrow Z \rightarrow F_{\pi/6}\rightarrow ?$ \\
+
+$h$-polarized $\rightarrow ~\frac{\pi}{3}$, $\frac{\pi}{6}$-polarized
+$\rightarrow~ \frac{\pi}{2}$\\
+
+
+(ii) Let $\phi\equiv \frac{1}{2n+1}(\pi/2)$ and suppose a photon starts $\phi$-polarized. Via a sequence of mirrors, $F_\phi Z$ is applied $n$ times, $\phi\rightarrow(Z\rightarrow F_\phi)^n\rightarrow?$ What is the probability it measures to have vertical polarization?\\
+
+If $n=1$ it must have vertical polarization (probability 1) otherwise it can't
+be vertically polarized ($n>1$)\\
+
+c) An $h$-polarized photon has zero probability of passing through a vertical
+polarizer $P_v$. Consider placing a diagonal polarizer $P_{\pi/4}$ in front of
+$P_v$.\\
+
+(i) What is the probability of passing through both,
+$h\rightarrow P_{\pi/4}\rightarrow P_v\rightarrow ?$
+
+This is equivalent to flipping a coin twice and getting two head
+(probabilistically): $\frac{1}{2}\frac{1}{2}=\frac{1}{4}$\\
+
+(ii) Now suppose $N-1$ polarizers, successively rotated by $\pi/2N$, are
+inserted before $P_v$, what is the probability of passing through all $N$,
+$h\rightarrow P_{\pi/2N}\rightarrow P_{2\pi/2N}\rightarrow
+...\P_{j\pi/2N}...\rightarrow P_{(N-1)\pi/2N}\rightarrow P_v\rightarrow?$, in
+the limit of large $N$?\\
+
+In the limit of large $N$ the probability goes to 1 (eventually must pass
+through each next polarizer as $N\rightarrow\infty$).\\
+
+\textbf{Problem 5:} 2-Qbit to 1-Qbit functions\\
+
+Attached at back\\
+
+
+
+\textbf{Problem 6:} Another generalization of Deutch's problem
+Deutsch’s problem involved a 1-bit to 1-bit function $f$ which was either
+constant or
+not. The Deutsch-Jozsa problem generalizes this to an $n$-bit to 1-bit function
+which is
+either constant (0 on all inputs or 1 on all inputs) or “balanced” (returns 1
+for half of the
+input domain and 0 for the other half). The task is to determine whether $f$ is constant or
+balanced.\\
+
+a) For a classical computer, how many evaluations of $f$ are required in the
+worst and
+best cases? What are the probabilities of the worst and best cases? (assume an
+equal prior
+probability of $f$ being constant or balanced)\\
+
+The worst case occurs when we see half the evaluations as the same, then an
+additional evaluation to determine whether $f$ was balanced or not. This would
+look like $2^{n-1}+1$ $f$ evaluations. The worst case probability is
+$.5+.5((\frac{n}{2}-1)!\cdot
+\frac{(\frac{n}{2}-1)}{(n-1)!}=.5+\frac{.5}{(n-1)!}$.
+
+In the best case we simply need to check two evaluations, if they are not the
+same $f$ is balanced. The probability of the best case looks like
+$\frac{2^{n-1}}{2^n-1}$
+
+b) (some ideas from wiki)\\
+
+Apply the Hadamard transformation to obtain
+$$\frac{1}{\sqrt{2^{n+1}}}\sum^{2^n-1}_{x=0}\ket{x}(\ket{0}-\ket{1})$$
+
+applying the $U_f$
+
+$$\frac{1}{\sqrt{2^{n+1}}}\sum^{2^n-1}_{x=0}\ket{x}(\ket{f(x)}-\ket{1\oplus
+f(x)})$$
+
+For each $x$ $f(x)$ is either 0 or 1 computing
+
+$$\frac{1}{\sqrt{2^{n+1}}}\sum^{2^n-1}_{x=0}(-1)^{f(x)}\ket{x}(\ket{0}-\ket{1})$$
+
+Applying the right side Hadamard transformation to each Qbit
+
+$$\frac{1}{2^n}\sum^{2^n-1}_{x=0})(-1)^{f(x)}\sum^{2^n-1}_{y=0}(-1^{xy}\ket{y}=\frac{1}{2^n}\sum^{2^n-1}_{y=0}\left[\sum^{2^n-1}_{x=0}(-1)^{f(x)}(-1)^{xy}\right]\ket{y}$$
+
+where $xy$ is the sum of the bitwise product ($x_0y_0\oplus x_1y_1\oplus
+...\oplus x_{n-1}y_{n-1}$).\\
+
+Examining the probability of measuring $\ket{0}^{\otimes n}$
+
+$$\left|\frac{1}{2^n}\sum^{2^n-1}_{x=0}(-1)^{f(x)}\right|$$
+
+which evaluates to 1 if $f(x)$ is constant, and to 0 if $f(x)$ is balanced.\\
+
+
+
+
+
+\textbf{Problem 7:} : Clauser-Horne-Shimony-Holt (’69) / Bell (’64)
+Inequality, Part II
+Recall the game played by Alice and Bob in problem 5 of the previous set:
+they receive
+random bits $x$, $y$, then (without communicating) output bits $a$, $b$, and win if $a\oplus b =xy$. We saw that no (local deterministic) strategy permitted them to win with greater than
+probability 3/4, i.e., no possible local hidden variables permit Alice and Bob
+to produce
+a, b systematically from $x$, $y$, such that $a \oplus b=xy$ more than 3/4 of
+the time.
+
+Now Now suppose Alice and Bob share the entangled state
+$\frac{1}{\sqrt{2}}(\ket{00}+\ket{11})$, with Alice
+holding one Qbit and Bob holding the other Qbit. Suppose they use the
+following strategy:
+if $x = 1$, Alice applies the unitary matrix $R_{\pi/6}=\mat{\cos
+\frac{\pi}{6} & -\sin\frac{\pi}{6}\\ \sin\frac{\pi}{6} & \cos\frac{\pi}{6}}$ to
+her Qbit, otherwise
+doesn't, then measures in the standard basis and outputs the result as $a$. If $y =
+1$, Bob
+applies the unitary matrix$R_{-\pi/6}=\mat{\cos
+ 24 \frac{\pi}{6} & \sin\frac{\pi}{6}\\ -\sin\frac{\pi}{6} & \cos\frac{\pi}{6}}$ to his Qbit, otherwise  doesn’t, then
+ measures in the standard basis and outputs the result as $b$. (Note that if the
+ Qbits were
+ encoded in photon polarization states, this would be equivalent to Alice and
+ Bob rotating
+ measurement devices by$\pi/6$ in inverse directions before measuring.)
+ Using this strategy:\\
+
+ a) Show that if $x=y=0$, then Alice and Bob win the game with probability
+ 1.\\
+
+ Let the superposition of Alice's Qbit be $\alpha_0\ket{0}+\alpha_1\ket{1}$
+ and bobs be $\beta_0\ket{0}+\beta_1\ket{1}$. The entangled 2 Qbit state is
+ then fully described by
+ $\alpha_0\beta_0\ket{00}+\alpha_0\beta_1\ket{01}+\alpha_1\beta_0\ket{10}+\alpha_1\beta_1\ket{11}.$\\
+
+ In this case once Alice or Bob observe (measure) their Qbit, the other is
+ forced to take it's value, so even though they each have a probability of 1/2
+ for either a 0 or a 1, they end up returning the same measurement due to the entanglement every time $P=1$\\
+
+b) Show that if $x=1$ and $y=0$ (or vice versa), then Alice and Bob win with
+probability 3/4\\
+
+Applying the agreed upon unitary operation
+
+$$R_{\pi/6}\mat{\alpha_0\\
+\alpha_1}=\mat{\frac{\alpha_0\sqrt{3}}{2}-\frac{\alpha_1}{2}\\
+\frac{\alpha_1\sqrt{3}}{2}-\frac{\alpha_0}{2}}$$
+
+the superposition then becomes
+
+$$\implies
+\left(\frac{\alpha_0\sqrt{3}}{2}-\frac{\alpha_1}{2}\right)\beta_0\ket{00}+\left(\frac{\alpha_1\sqrt{3}}{2}+\frac{\alpha_0}{2}\right)\beta_0\ket{10}+\left(\frac{\alpha_0\sqrt{3}}{2}-\frac{\alpha_1}{2}\right)\beta_1\ket{01}+\left(\frac{\alpha_1\sqrt{3}}{2}+\frac{\alpha_0}{2}\right)\beta_1\ket{11}$$
+
+if we apply a constraint that
+$\alpha_0\beta_0=\alpha_1\beta_1=\frac{1}{\sqrt{2}}$ and the 2 other
+coefficients =0 we end up with our wave function as
+
+$$\frac{\sqrt{6}}{4}\ket{00}+\frac{1}{2\sqrt{2}}\ket{01}+\frac{1}{2\sqrt{2}}+\frac{\sqrt{6}}{4}\ket{11}$$
+
+Taking $\sum|\alpha_x|^2$ we get 3/4. So Alice and Bob win with .75
+probability.\\
+
+c) Show that if $x=y=1$, then Alice and Bob win the game with probability 3/4.\\
+
+The superposition looks like
+$$\frac{1}{2\sqrt{2}}\ket{00}+\frac{\sqrt{3}}{2\sqrt{2}}\ket{01}+\frac{\sqrt{3}}{2\sqrt{2}}\ket{10}+\frac{1}{2\sqrt{2}}\ket{11}$$
+
+taking the sum of the squares of the coefficients we get a probability of .75\\
+
+d) Combining parts a-c, conclude that Alice and Bob win with greater overall
+probability that would be in a classical universe.\\
+
+the weights of parts a-c (likelihood of happening) are; $x=y=0$ happens .25,
+$x=1$ and $y=0$ or $x=0$ and $y=1$ happens .5, and $x=y=1$ happens .25. S0
+
+$$.25(1)+.5(.75)+.25(.75)=.8125$$
+
+This gives a probabilistic win percentage of \%81.25 which is higher than the
+.75 we calculated in a classical universe.\\
+
+
+\textbf{Problem 8:} Practice with three dimensional rotations\\
+
+Recall (eq B.13) that the $2\times2$ unitary matrix $u(\hat
+n,\theta)=\exp(i\frac{\theta}{2}\hat n,\vec\sigma)$ can be used to represent
+rotations in three real dimensions by an angle $\theta$ about the axis
+specified by the unit vector $\hat n$\\
+
+a) Write down the matrices $u(\hat x,\pi)$, $u(\hat y,\pi)$ for rotations by
+$180^\circ$ about the $\hat x$ and $\hat y$ axes. If you multiply these
+matrices (and the one's they generate) in all possible ways, how many distinct
+$2\times 2$ unitary matrices $u$ does this produce? To what three dimensional
+rotations do these corresond?\\
+
+from the book we have $u(\hat x,\pi)=\exp(i\frac{\pi}{2}\hat x\cdot\vec\sigma_x)$ and $u(\hat y,\psi)=\exp(i\frac{\pi}{2}\hat y\cdot\vec\sigma)y)$.
+
+It is clear (a simple calculation would show) that these matricies do not
+commute, therefore we can produce 4 distinct matrices from them. These
+matrices correspond to a rotation about the $x$ axis by 180$^\circ$ and a
+rotation about the $y$ axis by $180^\circ$. We can get to any other point on a
+sphere via these transformations.\\
+
+b) We have $u(\hat x,\pi)=\exp(i\frac{\pi}{4}\hat x\cdot\vec\sigma_x)$ and $u(\hat y,\psi)=\exp(i\frac{\pi}{4}\hat y\cdot\vec\sigma)y)$. Because these have more intervals before they hit a complete identity map. As a result we can enumerate 24 distict matricies up to isomorphism.\\
+
+
+
+
+
+
+
+
+
+
+
+
+
+\end{document}

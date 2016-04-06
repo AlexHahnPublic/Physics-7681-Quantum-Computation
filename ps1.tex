@@ -1,0 +1,252 @@
+\input{/Users/AlexHahn/LatexReusableFiles/PhysicsHeader.tex}
+\setlength{\parindent}{0pt}
+\begin{document}
+\title{Quantum Infortmation Processing, Problem Set 1}
+\author{Alex Hahn}
+\date{\today}
+\maketitle
+
+\textbf{Problem 1:} Tensor products and positional notation.\\
+
+Section 1.2 of the course text shows that if an integer $x$ between 0 and
+$2^n-1$ is represented by a $2^n$ component column vector with all components 0,
+except for a 1 in the position $x$ places down from the top place (the top
+places down from itself), then if the number is represented in binary, that
+column vector is just the tensor product of the $n$ 2-component column vectors
+that represent the values of its $n$ bits. Give an argument that is true of
+decimal numbers as well, taking as your example, the number $527$, showing that
+its representation as a 1000-component column vector (all 0's except for a 1 at
+position 527 places down from the top) is just the tensor product of the three
+10-component column vectors representing (from right to left) the digits 7, 2,
+and 5. (Since it is hard to fit a 1000 entry column vetor on the page, this
+requires an explanation that is at least in part, verbal.)\\
+
+In base 10 we simply let each column represent a power of 10
+(10$^0$ being farthest to the right) with the coeffecient being the entry that
+is a 1 in the corresponding column vector\\
+
+
+In base 10 we can represent the number 527 as the tensor product:
+
+$$527=\mat{0\\0\\0\\0\\0\\1\\0\\0\\0\\0}\otimes\mat{0\\0\\1\\0\\0\\0\\0\\0\\0\\0}\otimes\mat{0\\0\\0\\0\\0\\0\\0\\1\\0\\0}$$
+
+This tensor product would give us the 1000 length column vector with a 1 527
+places down from the top (note that the first position is the zeroth position)\\
+
+\textbf{Problem 2:} Manipulating elementary operators\\
+\textbf{a)} Carry out the ``more algebraic" derivation mentionaed at the top of
+page 13 of the relation
+$$\textbf{S}_{ij}=\textbf{C}_{ij}\textbf{C}_{ji}\textbf{C}_{ij}$$
+
+between the SWAP operator in the form (see section 1.4 of text for notation)
+
+$$\textbf{S}_{ij}=\textbf{n}_i\textbf{n}_j+(\textbf{X}_i\textbf{X}_j)(\textbf{n}_i\overline{\textbf{n}}_j+\overline{\textbf{n}}_i\textbf{n}_j),$$
+
+and the cNot operator in the form
+$$\textbf{C}_{ij}=\overline{\textbf{n}}_i+\textbf{X}_j\textbf{n}_i.$$
+
+You should only use the identities $\textbf{n}^2=\textbf{n}$,
+$\overline{\textbf{n}}^2=\overline{\textbf{n}},$
+$\textbf{n}\overline{\textbf{n}}=\overline{\textbf{n}}\textbf{n}=0,$
+$\textbf{n}+\overline{\textbf{n}}=1$,
+$\textbf{n}\textbf{X}=\textbf{X}\overline{\textbf{n}},$
+$\overline{\textbf{n}}\textbf{X}=\textbf{X}\textbf{n}$, and $\textbf{X}^2=1$,
+obeyed by the 1-bit NOT and number operators, and the fact that 1-bit operators
+acting on different Cbits commute.\\
+
+
+$$\textbf{S}_{ij}=\textbf{C}_{ij}\textbf{C}_{ji}\textbf{C}_{ij}$$
+$$=(\overline{\textbf{n}}_i+\textbf{X}_j\textbf{n}_i)(\overline{\textbf{n}}_j+\textbf{X}_i\textbf{n}_j)(\overline{\textbf{n}}_i+\textbf{X}_j\textbf{n}_i)$$
+$$=\overline{\textbf{n}}_i\overline{\textbf{n}}_j
++\textbf{X}_j\textbf{n}_i\textbf{X}_i\textbf{n}_j\overline{\textbf{n}}_i
++\overline{\textbf{n}}_i\textbf{X}_i\textbf{n}_j\textbf{X}_j\textbf{n}_i+\textbf{X}_j\textbf{n}_i\overline{\textbf{n}}_j\textbf{X}_j\textbf{n}_i$$
+
+using the identities above and changing the order (terms commute) of a few terms:
+$$=\overline{\textbf{n}}_i\overline{\textbf{n}}_j
++\textbf{X}_i\textbf{X}_j\overline{\textbf{n}}_i\textbf{n}_j
++\textbf{X}_i\textbf{X}_j\textbf{n}_i\overline{\textbf{n}}_j
++\textbf{n}_i\textbf{n}_j$$
+
+Finally grouping terms we have:
+
+$$\textbf{n}_i\textbf{n}_j+\overline{\textbf{n}}_i\overline{\textbf{n}}_j+(\textbf{X}_i\textbf{X}_j)(\overline{\textbf{n}}_i\textbf{n}_j+\textbf{n}_i\overline{\textbf{n}}_j)~\checkmark$$
+
+(From here on in assume everything but the subscripts are bold)\\
+
+\textbf{b)} Show from the equation (1.35) above that $S^2_{ij}=1$ again only use
+the identities given in the first part.\\
+
+$$(\textbf{S}_{ij})^2=(\textbf{n}_i\textbf{n}_j+(\textbf{X}_i\textbf{X}_j)(\textbf{n}_i\overline{\textbf{n}}_j+\overline{\textbf{n}}_i\textbf{n}_j))^2$$
+$$=(n_in_jn_in_j+\bar n_i\bar n_j n_in_j +(X_iX_j)(\bar n_in_j+n_i\bar
+n_j)n_in_j)
++(n_in_j\bar n_i\bar n_j + \bar n_i\bar n_j \bar n_i \bar
+n_j+(X_iX_j)(\bar n_in_j+n_i\bar n_j)\bar n_i \bar n_j)$$
+$$+(n_in_j(X_iX_j)(\bar n_in_j+n_i\bar n_j)+\bar n_i \bar n_j(X_iX_j)(\bar n_in_j+n_i\bar n_j)+(X_iX_j)(\bar n_in_j +n_i\bar n_j)(X_iX_j)(\bar n_in_j+n_i\bar n_j))$$
+$$=n_in_j)+(\bar n_i\bar n_j \bar n_i \bar n_j)+((\bar n_i n_j +n_i\bar
+n_j)(\bar n_in_j+n_i\bar n_j))$$
+$$=n_i(n_j+\bar n_j)+\bar n_i(\bar n_j+n_j)$$
+$$n_i+\bar n_i$$
+$$=1~\checkmark$$
+
+\textbf{c)} Verify $S_{ij}=C_{ij}C_{ji}C_{ij}$, by using repeated application of
+(1.21) and $x\oplus x=0$.\\
+
+To show for the Cbit form:
+
+$$S_{10}\ket{x}\ket{y}=C_{10}C_{01}C_{10}\ket{x}\ket{y}$$
+$$=C_{10}C_{01}\ket{x}\ket{y\oplus x}$$
+$$=C_{10}\ket{x\oplus y\oplus x}\ket{y\oplus x}$$
+$$=C_{10}\ket{y}\ket{y\oplus x}$$
+$$=\ket{y}\ket{y\oplus x \oplus y}$$
+$$=\ket{y}\ket{x}$$
+
+
+I'll show this in a more generalized form (applicable to qbits as well!)\\
+
+Given state
+$\alpha\beta\ket{00}+\alpha\delta\ket{01}+\beta\kappa\ket{10}+\beta\delta\ket{11}$\\
+
+The first Cnot operator gives us:
+$$\alpha\kappa\ket{00}+\alpha\delta\ket{01}+\beta\delta\ket{10}+\beta\kappa\ket{11}$$
+the next Cnot operator gives us:
+$$\alpha\kappa\ket{00}+\beta\kappa\ket{01}+\beta\delta\ket{10}+\alpha\delta\ket{11}$$
+and finally the third Cnot returns
+$$\alpha\kappa\ket{00}+\beta\kappa\ket{01}+\alpha\delta\ket{10}+\beta\delta\ket{11}$$
+
+the coefficients are commutable so
+$$=\kappa\alpha\ket{00}+\kappa\beta\ket{01}\delta\alpha\ket{01}\delta\beta\ket{11}$$
+which is our original state but swapped.\\
+
+\textbf{d)} Use $n=\frac{1}{2}(1-Z),\bar n=\frac{1}{2}(1+Z)$ in the expression
+(1.35) above for $S_{ij}$ to show (1.49):
+$S_{ij}=\frac{1}{2}(!+Z_iZ_j)+\frac{1}{2}(X_iX_j)(1-Z_iZ_j)$.\\
+
+$$S_{ij}=n_in_j+\bar n_i n_j +(X_iX_j)(\bar n_i n_j+n_i\bar n_j)$$
+$$=\frac{1}{2}(1-Z_i)\frac{1}{2}(1-Z_j)+\frac{1}{2}(1+Z_i)\frac{1}{2}(1+Z_j)+(X_iX_j)(\frac{1}{2}(1+Z_i)\frac{1}{2}(1-Z_j)+\frac{1}{2}(1-Z_j)+\frac{1}{2}(1+Z_j))$$
+$$=\frac{1}{4}(1-Z_i-Z_j+Z_iZ+j)+\frac{1}{4}(1+Z_i+Z_j+Z_iZ_j)+(X_iX_j)(\frac{1}{4}(1+Z_i-Z_j-Z_iZ_j)+\frac{1}{4}(1-Z_i+Z_j-Z_iZ_j)$$
+$$=\frac{1}{2}(1+Z_iZ_j)+\frac{1}{2}(X_iX_j)(1-Z_iZ_j)~\checkmark$$
+
+
+
+
+\textbf{Problem 3:} 2-Cbit gates
+As mentioned in class, there are 4!=24 possible classical operations on the four
+2-Cbit basis states. How many of these are achievable via the classical operations
+$S_{ij}$, $C_{ij}$, and $X_j$ (and compositions thereof)?\\
+
+All 24 are achievable via these operations because they cover all permuations of
+the 2-Cbit basis (we also know that they can be mapped into each other because
+these operations are all reversible as stated many times in the chapter, we can
+make many of them singly through swap (exchanging the columns of the basis) (or
+3 cnots) the rest (if odd parity) can be constructed through not, Cnots, or some
+combination of the three.\\
+
+\textbf{Problem 4: Some 3-Cbit gates}
+a) The classical 3-Cbit gates $\textbf{C}_{ij}$ operate on an 8 dimensional vector space of 3-Cbit states. Find the 8x8 matrices for $\textbf{C}_{21}$ and $\textbf{C}_02$ by generalizing to 3-Cbit states the
+procedure used to construct the 44 matrices of cNOT on 2-Cbit states on p.10 of
+chpt.1.\\
+
+$$\textbf{C}_{21}=\mat{1 & 0 & 0 & 0 & 0 & 0 & 0 & 0\\ 0 & 1 & 0 & 0 & 0 & 0 & 0
+& 0\\ 0 & 0 & 1 & 0 & 0 & 0 & 0 & 0\\ 0 & 0 & 0 & 1 & 0 & 0 & 0 & 0\\ 0 & 0 & 0
+& 0 & 0 & 0 & 1 & 0\\ 0 & 0 & 0 & 0 & 0 & 0 & 0 & 1\\ 0 & 0 & 0 & 0 & 1 & 0 & 0
+& 0\\ 0 & 0 & 0 & 0 & 0 & 1 & 0 & 0}$$
+
+$$\textbf{C}_{02}=\mat{1 & 0 & 0 & 0 & 0 & 0 & 0 & 0\\ 0 & 0 & 0 & 0 & 0 & 1 & 0
+& 0\\ 0 & 0 & 1 & 0 & 0 & 0 & 0 & 0\\ 0 & 0 & 0 & 0 & 0 & 0 & 0 & 1\\ 0 & 0 & 0
+& 0 & 1 & 0 & 0 & 0\\ 0 & 1 & 0 & 0 & 0 & 0 & 0 & 0\\ 0 & 0 & 0 & 0 & 0 & 0 & 1
+& 0\\ 0 & 0 & 0 & 1 & 0 & 0 & 0 & 0}$$
+
+b) The 3-Cbit controlled-controlled-NOT gate $\textbf{T}_{ijk}$ (also called
+the Toffoli gate, after its inventor) plays a very important role in the classical theory of reversible computation. It has two control bits ($i$ and $j$) and a target bit ($k$), and is defined to act as the identity
+unless both control bits are 1, in which case it acts as NOT on the target bit.
+Find the 8x 8 matrices in the set of 3-Cbit states $\ket{x_2}\ket{x_1}\ket{x_0}$
+of $\textbf{T}_{210}$, $\textbf{T}_{201}$, $\textbf{T}_{102}$.\\
+
+$$\textbf{T}_{210}=\mat{1 & 0 & 0 & 0 & 0 & 0 & 0 & 0\\ 0 & 1 & 0 & 0 & 0 & 0 &
+0 & 0 \\ 0 & 0 & 1 & 0 & 0 & 0 & 0 & 0 \\ 0 & 0 & 0 & 1 & 0 & 0 & 0 & 0 \\ 0 & 0
+& 0 & 0  & 1 & 0 & 0 & 0 \\ 0 & 0 & 0 & 0 & 0 & 1 & 0 & 0 \\ 0 & 0 & 0 & 0 &
+0 & 0 & 0 & 1\\ 0 & 0 & 0 & 0 & 0 & 0 & 1 & 0}$$
+
+$$\textbf{T}_{201}=\mat{1 & 0 & 0 & 0 & 0 & 0 & 0 & 0\\ 0 & 1 & 0 & 0 & 0 & 0 &
+0 & 0 \\ 0 & 0 & 1 & 0 & 0 & 0 & 0 & 0 \\ 0 & 0 & 0 & 1 & 0 & 0 & 0 & 0 \\ 0 & 0
+& 0 & 0  & 1 & 0 & 0 & 0 \\ 0 & 0 & 0 & 0 & 0 & 0 & 0 & 1 \\ 0 & 0 & 0 & 0 &
+0 & 0 & 1 & 0\\ 0 & 0 & 0 & 0 & 0 & 1 & 0 & 0}$$
+
+$$\textbf{T}_{102}= \mat{1 & 0 & 0 & 0 & 0 & 0 & 0 & 0\\ 0 & 1 & 0 & 0 & 0 & 0 &
+0 & 0 \\ 0 & 0 & 1 & 0 & 0 & 0 & 0 & 0 \\ 0 & 0 & 0 & 0 & 0 & 0 & 0 & 1 \\ 0 & 0
+& 0 & 0  & 1 & 0 & 0 & 0 \\ 0 & 0 & 0 & 0 & 0 & 1 & 0 & 0 \\ 0 & 0 & 0 & 0 &
+0 & 0 & 1 & 0\\ 0 & 0 & 0 & 1 & 0 & 0 & 0 & 0}$$
+
+\textbf{Problem 5:} Consider the following cooperative game played by Alica and
+Bob: Alice receives a bit $x$ and Bob receives a bit $y$, with both bits uniformly
+random and independent. The players win if Alice outputs a bit $a$ and Bob outputs a bit $b$, such that $a+b= xy$(mod2) (equivalently, $a\oplus b=xy$, where bits take the values 0,1). They can agree on a strategy in
+advance of receiving $x$ and $y$, but no subsequent communication between them is
+allowed.\\
+
+a) Give a deterministic strategy by which Alice and Bob can win this game with
+probability 3/4.\\
+
+The only strategy that repeatedly guarantees this probabiliy is if they both
+agree to play (and actually do play) 0 each time (look at the results table,
+it's clear that the only time this wouldn't win is if both x and y were 1).\\
+
+b) Show that no deterministic strategy lets them win with more than probability
+3/4.
+(Note that Alice has four possible deterministic strategies
+$[\textbf{0,~1,~x,~\~x}]$, and bob has four $[\textbf{0,~1,~y,~\~y}]$, so
+there's a total of 16 possible joint deterministic strategies.)\\
+
+We already know that both choosing 0 no matter what gives 3/4 probability. I
+will show the remaining then argue by symmetry that we've covered all
+possibilities (switching the roles of Alice and Bob makes no real difference) and that none are greater than 3/4\\
+
+Alice: 0 and Bob: 1 gives 1/4 (xy is only 1, 1/4 of the time\\
+Alice: 0 and Bob: y gives 3/4 (only when x=0 and y=1 does it fail\\
+Alice: 0 and Bob: \~y gives 1/4 (only when x=0 and y=1 does it work\\
+Alice: 1 and Bob: 1 gives 3/4 (only x=1 and y=1 doesn't work\\
+Alice: 1 and Bob: y gives  1/4 (only x=1 and y=0 works\\
+Alice: 1 and Bob: \~y gives 3/4 (only x=0 and y=1 fails)\\
+Alice: x and Bob: y gives 1/4 (only both x and y 0 works)\\
+Alice: x and Bob: \~y gives 3/4 (only both x and y 0 fails)\\
+Alice \~x and Bob: \~y gives 1/4 (only both 0 works)\\
+
+from here we can argue that if we simply switch the names of Bob and Alice we
+cover the rest of the cases by symmetry (it shouldn't matter who's ``Bob" and
+who's ``Alice"). None are over 75\% success rate.\\
+
+
+
+c) Show that no probabalistic strategy lets them win with more than probability
+3/4. (In a probabalistic strategy, Alice plays her possible strategies with some
+fixed probabilities $p_0,p_1p_xp_{\bar x}$, where $\sum_\alpha p_\alpha=1$, same
+for bob.
+
+We need to show that any linear combination of strategies doesn't yield an
+expected value greater than 3/4.\\
+
+I believe that the above brute force method shows that you still can't get above
+a 3/4's chance of winning. If we assign arbitrary coefficients $0\leq0\leq1$ to
+all of her/their choices such that the sum of the probabilities of all choices
+is 1 every set of chosen strategies (one must be picked) still yields a 3/4
+chance or lower as shown above. This is equivalent to saying that instead of
+talking about their strategies before hand they don't but they still have to
+decide on one to pick before they play and we've shown that every combination
+yields a $\leq 3/4$ chance of succeeding for random x and y (as stated).\\
+
+(Effectively they have to pick some equivalent strategy to one enumerated above
+even if it is probalisticly).\\
+
+
+$^*$(Talked with Andrew Casey about a few of the problems)
+
+
+
+
+
+
+
+
+
+
+
+\end{document}
